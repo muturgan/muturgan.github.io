@@ -1,0 +1,9 @@
+{
+  "name": "pinguin-client",
+  "version": "1.0.0",
+  "description": "simple client for listning pings from the pinguin-server",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

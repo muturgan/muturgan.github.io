@@ -1,0 +1,138 @@
+﻿html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #edc16f;
+  box-sizing: border-box;
+}
+
+.grid-container {
+  background: #edc16f;
+  height: 100%;
+  width: 100vw;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 2fr 1fr;
+  grid-template-areas:
+    "header header header"
+    ". . . "
+    ". game-field side-bar"
+    ". . . "
+    "footer footer footer";
+  justify-items: stretch;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.side-bar {
+  grid-area: side-bar;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #edc16f;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.header {
+  grid-area: header;
+  min-height: 60px;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  background: #edc16f;
+}
+
+.mid {
+	grid-area: game-field;
+}
+
+.grid-container .game-field {
+  width: 424px;
+  min-width: 424px;
+  max-width: 424px;
+  height: 424px;
+  max-height: 424px;
+  min-height: 424px;
+  box-sizing: border-box;
+  background-color: gray;
+  border: 7px solid black;
+  padding: 10px 0 0 10px;
+  margin: auto;
+}
+
+.game-field .filled {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  width: 90px;
+  height: 90px;
+  margin: 0 10px 10px 0;
+  padding: 4px 0 0 13px;
+  font-size: 1.75rem;
+  border: none;
+  z-index: 2;
+  transition-duration: 0.2s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+}
+
+.game-field .empty {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: gray;
+  color: gray;
+  width: 90px;
+  height: 90px;
+  margin: 0 10px 10px 0;
+  padding: 4px 0 0 13px;
+  font-size: 1.75rem;
+  border: none;
+  z-index: 1;
+}
+
+.footer {
+  grid-area: footer;
+  border-color: orange;
+  min-height: 80px;
+  margin-top: 30px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: black;
+  color: white;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 1rem;
+}
+
+input {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}

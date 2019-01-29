@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <title>voltage drop</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="grid-item header">Программа расчета падения напряжения на участке сети</div>
+
+    <div class="grid-item myBox">
+      <form name = "voltageDrop">
+        <fieldset>
+          <label>
+          Мощность <input type="text" name="power" id="power" placeholder="Введите мощность нагрузки">, кВт
+        </label>
+          <br>
+
+          <label>
+          Длина <input type="text" name="length" id="length" placeholder="Введите длину кабеля">, м
+        </label>
+          <br>
+
+          <label>Сечение
+          <select name="section">
+            <option value="1,5">1,5</option>
+            <option value="2,5" selected>2,5</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+            <option value="16">16</option>
+            <option value="25">25</option>
+            <option value="35">35</option>
+            <option value="50">50</option>
+            <option value="70">70</option>
+            <option value="95">95</option>
+            <option value="120">120</option>
+            <option value="150">150</option>
+            <option value="185">185</option>
+            <option value="240">240</option>
+          </select>, мм<sup>2</sup>
+        </label>
+        </fieldset>
+
+        <fieldset>
+          <label>
+          <input type="radio" name="voltage" value="380" checked> 380В
+        </label>
+          <br>
+
+          <label>
+          <input type="radio" name="voltage" value="220"> 220В
+        </label>
+          <br>
+
+          <label>
+          <input type="radio" name="material" value="Cu" checked> Медь
+        </label>
+          <br>
+
+          <label>
+          <input type="radio" name="material" value="Al"> Алюминий
+        </label>
+          <br>
+        </fieldset>
+
+        <fieldset>
+          <button value="calculate" type="button" title="Ну же!">Рассчитать</button>
+
+          <output name="drop">5%</output>
+
+          <label>
+          <input type="reset" value="Сбросить">
+        </label>
+        </fieldset>
+
+      </form>
+
+    </div>
+
+    <div class="grid-item footer">footer</div>
+  </div>
+
+</body>
+
+</html>

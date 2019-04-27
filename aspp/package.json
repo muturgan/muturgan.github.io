@@ -17,7 +17,10 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 10"
+    "not ie <= 10",
+    "maintained node versions",
+    "not OperaMini",
+    "not dead"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",

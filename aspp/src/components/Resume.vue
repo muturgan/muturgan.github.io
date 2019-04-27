@@ -1,22 +1,22 @@
 <template>
 	<div class="sheet">
-    <div class="header">
-      <h3> РЕЗЮМЕ </h3>
-      <h4> Соискателя на должность web-разработчика </h4>
-    </div>
-    <br>
+      <div class="header">
+         <h3> РЕЗЮМЕ </h3>
+         <h4> Соискателя на должность web-разработчика </h4>
+      </div>
+      <br>
 
-    <div class="photo">
-      <img
-        alt="My photo"
-        :src=" basePath + '/aspp/img/photo.jpg' "
-        width="57.9"
-        height="71.7"
-      >
-    </div>
-    
-    <div class="personal-information">
-      <pre>Сахаров Андрей Александрович
+      <div class="photo">
+         <img
+            alt="My photo"
+            :src=" basePath + '/aspp/img/photo.jpg' "
+            width="57.9"
+            height="71.7"
+         >
+      </div>
+
+      <div class="personal-information">
+         <pre>Сахаров Андрей Александрович
 г.Тула. Дата рождения: 26.04.1987
 Женат, есть ребенок
 
@@ -26,11 +26,11 @@ e-mail: caxap_8787@mail.ru
 Образование – высшее (специалист) 2010г.
 Тулский Государственный Университет,
 Институт высокоточных систем им. В.П. Грязева,
-специальность «Электроснабжение»
-    </div>
-    
-    <div class="expirience-and-skills">
-      <pre>Работал на различных предприятиях в отрасли электроэнергетики.
+специальность «Электроснабжение»</pre>
+      </div>
+
+      <div class="expirience-and-skills">
+         <pre>Работал на различных предприятиях в отрасли электроэнергетики.
 С января 2018г. самостоятельно изучаю web-технологий с приоритетом JavaScript, Vue.js.
 
 За период обучения мною был разработан ряд проектов, наиболееинтересные из которых:
@@ -57,7 +57,8 @@ e-mail: caxap_8787@mail.ru
 Желаемый уровень заработной платы:
 35000 руб. (после вычета налогов).
 </pre>
-    </div>
+      </div>
+   </div>
 </template>
 
 <script>

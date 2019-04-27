@@ -13,7 +13,7 @@ export default class AddedGoodsItem extends Component {
 	}
 	
 	addGood({ goodsList, good, }) {
-		for (let existentGood of goodsList.querySelectorAll(`li`)) {
+		for (const existentGood of goodsList.querySelectorAll(`li`)) {
 			if (existentGood.firstElementChild.textContent === good) {
 				existentGood.querySelector(`.goods-amount`).textContent = (
 					existentGood.querySelector(`.goods-amount`).textContent[0] +

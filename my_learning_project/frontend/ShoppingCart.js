@@ -17,7 +17,7 @@ export default class ShoppingCart extends Component {
 		
 		this._component.addEventListener(`click`, (event) => {
 			if (event.target.classList.contains(`remove-good`)) {
-				for (let good of this._goods) {
+				for (const good of this._goods) {
 					if ( good.element === event.target.closest(`li`) ) {
 						good.removeGood({
 							goodsList: this._addedGoods,
@@ -28,7 +28,7 @@ export default class ShoppingCart extends Component {
 			}
 		});
 		
-		let observer = new MutationObserver(() => {
+		const observer = new MutationObserver(() => {
 			this._isEmpty();
 		});
 		observer.observe(this._addedGoods, { childList: true, });

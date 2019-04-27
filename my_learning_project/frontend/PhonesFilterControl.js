@@ -11,9 +11,9 @@ export default class PhonesFilterControl extends Component {
 		
 		this._render();
       
-      this._component.addEventListener(`input`, (event) => {
-         let customEvent = new CustomEvent(`goodsFiltred`, {
-            detail: event.target.value,
+      	this._component.addEventListener(`input`, (event) => {
+         	const customEvent = new CustomEvent(`goodsFiltred`, {
+            	detail: event.target.value,
 			});
 				
 			this._component.dispatchEvent( customEvent );

@@ -11,9 +11,9 @@ export default class PhonesSortControl extends Component {
 		
 		this._render();
       
-      this._component.addEventListener(`change`, (event) => {
-         let customEvent = new CustomEvent(`goodsSorted`, {
-            detail: event.target.value,
+      	this._component.addEventListener(`change`, (event) => {
+         	const customEvent = new CustomEvent(`goodsSorted`, {
+            	detail: event.target.value,
 			});
 				
 			this._component.dispatchEvent( customEvent );

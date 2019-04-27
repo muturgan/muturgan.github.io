@@ -17,7 +17,7 @@ export default class PhonesListItem extends Component {
       
       this._component.addEventListener(`click`, (event) => {
 			if (event.target.closest(`[data-action="show-details"]`)) {
-				let customEvent = new CustomEvent(`goodSelected`, {
+				const customEvent = new CustomEvent(`goodSelected`, {
                bubbles: true,
 					detail: this._features.id,
 				});
@@ -27,7 +27,7 @@ export default class PhonesListItem extends Component {
 		});
       
       this._component.querySelector(`[data-action="add-to-chart"]`).addEventListener(`click`, (event) => {
-         let customEvent = new CustomEvent(`goodAdded`, {
+         const customEvent = new CustomEvent(`goodAdded`, {
             bubbles: true,
             detail: this._features.name,
          });

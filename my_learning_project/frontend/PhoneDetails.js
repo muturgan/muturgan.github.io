@@ -15,7 +15,7 @@ export default class PhoneDetails extends Component {
    
    setSelectedPhone(selectedPhonedata) {
       this._selectedPhoneData = selectedPhonedata;
-      for (let key in this._selectedPhoneData) {
+      for (const key in this._selectedPhoneData) {
          if (key !== `images` && key !== `name` && key !== `description` && key !== `description` && key !== `id`) {
             this._filteredData[key] = this._selectedPhoneData[key];
          }
@@ -24,7 +24,7 @@ export default class PhoneDetails extends Component {
       this._render();
       
       this._component.querySelector(`[data-action="add-to-chart"]`).addEventListener(`click`, (event) => {
-         let customEvent = new CustomEvent(`goodAdded`, {
+         const customEvent = new CustomEvent(`goodAdded`, {
             detail: this._selectedPhoneData.name,
          });
          
@@ -32,7 +32,7 @@ export default class PhoneDetails extends Component {
 		});
       
       this._component.querySelector(`[data-action="back-to-list"]`).addEventListener(`click`, (event) => {
-         let customEvent = new CustomEvent(`detaisPageClosed`);
+         const customEvent = new CustomEvent(`detaisPageClosed`);
          
          this._component.dispatchEvent( customEvent );			
 		});
@@ -82,9 +82,9 @@ export default class PhoneDetails extends Component {
       this._mainImage = this._component.querySelector(`[data-indicator="main-image"]`);
       
       this._imagesList = this._component.querySelector(`.phone-thumbs`);
-      let specsList = this._component.querySelector(`.specs`);
+      const specsList = this._component.querySelector(`.specs`);
       
-      for (let image of this._selectedPhoneData.images) {
+      for (const image of this._selectedPhoneData.images) {
          this._imagesList.insertAdjacentHTML(`beforeEnd`, `
             <li>
                <img
@@ -268,7 +268,7 @@ export default class PhoneDetails extends Component {
             <dl>
       `;
       
-      for (let availabilityFeature of this._selectedPhoneData.availability) {
+      for (const availabilityFeature of this._selectedPhoneData.availability) {
          assistiveString += `<dd> ${ availabilityFeature || '-' } </dd>`;
       }
       

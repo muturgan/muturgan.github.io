@@ -22,7 +22,7 @@ export default class PhonesList extends Component {
 	}
 	
 	_render() {
-		for (let phoneFeatures of this._phones) {
+		for (const phoneFeatures of this._phones) {
 			this._items.push (new PhonesListItem({
 				container: this._component,
 				features: phoneFeatures,
@@ -46,7 +46,7 @@ export default class PhonesList extends Component {
 			}
 		});
 		
-		for (let item of this._items) {
+		for (const item of this._items) {
 			this._component.prepend(item._component);
 		}
 	};
@@ -54,7 +54,7 @@ export default class PhonesList extends Component {
 	filter(str) {
 		str = str.toLowerCase();
 
-		for (let item of this._items) {
+		for (const item of this._items) {
 			if (item._features.name.toLowerCase().includes(str)) {
 				item.show();
 			} else {

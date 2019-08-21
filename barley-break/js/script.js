@@ -1,5 +1,7 @@
 ﻿"use strict";
 
+const audio = new Audio('Sound_22465.mp3');
+
 let gameField = document.getElementById("gameField");
 let emptyCell = document.getElementsByName("item0");
 let filledItems = document.getElementsByClassName("filled");
@@ -40,6 +42,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellTop);
     emptyCell[0].style.top = +currentPropValue - 100 + "px";
 
+    audio.play();
     return;
   }
 
@@ -50,6 +53,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellTop);
     emptyCell[0].style.top = +currentPropValue + 100 + "px";
 
+    audio.play();
     return;
   }
 
@@ -60,6 +64,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellLeft);
     emptyCell[0].style.left = +currentPropValue - 100 + "px";
 
+    audio.play();
     return;
   }
 
@@ -70,6 +75,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellLeft);
     emptyCell[0].style.left = +currentPropValue + 100 + "px";
 
+    audio.play();
     return;
   }
 }

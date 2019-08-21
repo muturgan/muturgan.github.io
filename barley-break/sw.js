@@ -51,6 +51,7 @@ function updateCache(request, response) {
       console.log(request)
       console.log("response")
       console.log(response)
+      confirm("ready?")
     });
   });
 }

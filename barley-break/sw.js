@@ -44,6 +44,13 @@ function fromCache(request) {
 
 function updateCache(request, response) {
   return caches.open(CACHE).then(function (cache) {
-    return cache.put(request, response);
+    return cache.put(request, response).then(err => {
+      console.log("err")
+      console.log(err)
+      console.log("request")
+      console.log(request)
+      console.log("response")
+      console.log(response)
+    });
   });
 }

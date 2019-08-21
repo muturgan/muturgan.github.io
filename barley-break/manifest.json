@@ -3,7 +3,7 @@
     "short_name": "Barley Break",
     "description": "Игра Пятнашки",
     "lang": "ru-RU",
-    "start_url": "/",
+    "start_url": "/barley-break",
     "display": "standalone",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",

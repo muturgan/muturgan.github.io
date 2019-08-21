@@ -1,12 +1,15 @@
 ﻿"use strict";
 
-const audio = new Audio('Sound_22465.mp3');
+const tapSound = new Audio('Sound_22465.mp3');
+const resetSound = new Audio('Sound_22469.mp3');
 
 let gameField = document.getElementById("gameField");
 let emptyCell = document.getElementsByName("item0");
 let filledItems = document.getElementsByClassName("filled");
 let resetButton = document.getElementById("reset");
 let checkbox = document.getElementById("valid");
+
+checkbox.addEventListener("change", () => tapSound.play())
 
 gameField.addEventListener("click", makeTurn);
 resetButton.addEventListener("click", reset);
@@ -42,7 +45,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellTop);
     emptyCell[0].style.top = +currentPropValue - 100 + "px";
 
-    audio.play();
+    tapSound.play();
     return;
   }
 
@@ -53,7 +56,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellTop);
     emptyCell[0].style.top = +currentPropValue + 100 + "px";
 
-    audio.play();
+    tapSound.play();
     return;
   }
 
@@ -64,7 +67,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellLeft);
     emptyCell[0].style.left = +currentPropValue - 100 + "px";
 
-    audio.play();
+    tapSound.play();
     return;
   }
 
@@ -75,7 +78,7 @@ function makeTurn(event) {
     currentPropValue = parseInt(emptyCellLeft);
     emptyCell[0].style.left = +currentPropValue + 100 + "px";
 
-    audio.play();
+    tapSound.play();
     return;
   }
 }
@@ -99,6 +102,8 @@ function reset() {
   for (let i = 0; i < 15; i++) {
 	  filledItems[i].innerHTML = newPool[i];
   }
+
+  resetSound.play();
 }
 
 

@@ -44,7 +44,7 @@ function fromCache(request) {
 
 function updateCache(request, response) {
   return caches.open(CACHE).then(function (cache) {
-    return cache.put(request, response).then(err => {
+    return cache.put(request, response).catch(err => {
       console.log("err")
       console.log(err)
       console.log("request")

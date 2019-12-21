@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Awesome Grammar Analyzer</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <span class="navbar-brand">Awesome Grammar Analyzer</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-xs-4">
+	</div>
+	<div class="col-xs-4">
+		<form role="form" >
+			<div class="form-group">
+				<label>Enter an expression for checking</label>
+				<input type="text" class="form-control" id="expression" name="title" />
+			</div>
+			<button type="button" role="button" class="btn btn-default">Check grammar</button>
+        </form>
+        
+        <div class="row result js-hidden">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                <h1 class="title">{{ $value.Title }}</h1>
+            </div>
+            <div class="col-xs-2">
+            </div>
+        </div>
+        <div class="row result js-hidden">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8 content">
+                {{ $value.Content }}
+            </div>
+            <div class="col-xs-2">
+            </div>
+        </div>
+
+	</div>
+	<div class="col-xs-4">
+	</div>
+</div>
+
+
+<script src="assets/js/jquery-2.1.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/grammar-analyzer.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

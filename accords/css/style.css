@@ -1,4 +1,4 @@
-﻿html: {
+﻿html {
 	box-sizing: border-box;
 	height: 100%;
 	padding: 0;
@@ -32,7 +32,7 @@ body {
 	padding: 10px;
 	margin: 0;
 	text-align:center;
-	flex-basis: 10%; 
+	flex-basis: 10%;
 	box-sizing: border-box;
 	background: #edc16f;
 	border: 2px solid red;
@@ -40,7 +40,7 @@ body {
 
 .mid{
 	box-sizing: border-box;
-	flex-basis: 80%; 
+	flex-basis: 80%;
 	display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -50,7 +50,7 @@ body {
 	margin: 0;
 	padding: 10px;
 	box-sizing: border-box;
-	flex-basis: 60%; 
+	flex-basis: 60%;
 	border-top: 1px solid black;
 	background: #edc16f;
 	overflow: auto;
@@ -61,7 +61,7 @@ body {
 	padding: 10px;
 	color: white;
 	box-sizing: border-box;
-	flex-basis: 40%; 
+	flex-basis: 40%;
 	background: #4f2424;
 }
 
@@ -69,7 +69,7 @@ body {
 	margin: 0;
 	padding: 10px;
 	box-sizing: border-box;
-	flex-basis: 10%; 
+	flex-basis: 10%;
 	background: black;
 	color: white;
 }
@@ -77,42 +77,42 @@ body {
 
 
 .hand{
- height: 20vh; 
-  width: 90vw;
-  min-height:110px;
+	height: 20vh;
+	width: 90vw;
+	min-height:110px;
 }
 
 
 
 #info {
-  overflow: auto;
-  }
+	overflow: auto;
+}
 
 
 .myButton {
 	margin: 3px;
-  background-color:#F0B35F;
-  color:#F54C0A;
-  text-align: center;
-  height: 35px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding:2px;
-  box-sizing: border-box;
-  box-shadow: 4px 4px black;
-  outline: none;  
+	background-color:#F0B35F;
+	color:#F54C0A;
+	text-align: center;
+	height: 35px;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding:2px;
+	box-sizing: border-box;
+	box-shadow: 4px 4px black;
+	outline: none;
 }
 
 .myButton:hover {
-  	border: 2px solid brown;
+	border: 2px solid brown;
 	outline: none;
-  }
-  
-  .myButton:active {
-  box-shadow: none;	
-  outline: none;
-  }
-  
+}
+
+.myButton:active {
+	box-shadow: none;
+	outline: none;
+}
+
 span[name="accord"] {
 	color: darkblue;
 }

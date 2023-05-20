@@ -116,3 +116,12 @@ body {
 span[name="accord"] {
 	color: darkblue;
 }
+
+@media (max-width: 767px) {
+	.left-bar{
+		flex-basis: 90%;
+	}
+	.right-bar{
+		flex-basis: 10%;
+	}
+}

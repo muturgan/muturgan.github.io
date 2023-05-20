@@ -15,7 +15,7 @@ const accords = document.querySelectorAll('.accord');
 const upAccordsList = () => {
 
 	accords.forEach((accord) => {
-		const accordInWork = accord.innerHTML;
+		const accordInWork = accord.textContent.trim();
 
 		let stringInWork = '';
 
@@ -50,7 +50,7 @@ const upAccordsList = () => {
 const downAccordsList = () => {
 
 	accords.forEach((accord) => {
-		const accordInWork = accord.innerHTML;
+		const accordInWork = accord.textContent.trim();
 
 		let stringInWork = '';
 

@@ -9,7 +9,7 @@ const tone = {
 
 const upButton = document.getElementById('up');
 const downButton = document.getElementById('down');
-const accords = document.getElementsByName('accord');
+const accords = document.querySelectorAll('.accord');
 
 
 const upAccordsList = () => {

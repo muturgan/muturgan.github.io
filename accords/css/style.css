@@ -113,7 +113,7 @@ body {
 	outline: none;
 }
 
-span[name="accord"] {
+.accord {
 	color: darkblue;
 }
 

@@ -43,7 +43,7 @@ const upAccordsList = () => {
 			stringInWork += accordInWork[k];
 		}
 
-		accord.textContent = stringInWork;
+		accord.textContent = stringInWork.padEnd(3);
 	});
 }
 
@@ -80,7 +80,7 @@ const downAccordsList = () => {
 			stringInWork += accordInWork[k];
 		}
 
-		accord.textContent = stringInWork;
+		accord.textContent = stringInWork.padEnd(3);
 	});
 }
 

@@ -9,8 +9,8 @@ const tone = {
 	tonicArrayPosition:  [0,    1,        2,     3,        4,   5,      6,       7,        8,           9,   10,         11]
 };
 
-const upButton = document.getElementById("up");
-const downButton = document.getElementById("down");
+const upButton = document.getElementById('up');
+const downButton = document.getElementById('down');
 const accords = document.getElementsByName('accord');
 
 
@@ -86,7 +86,7 @@ const downAccordsList = () => {
 	});
 }
 
-upButton.addEventListener("click", upAccordsList, {passive: true});
-downButton.addEventListener("click", downAccordsList, {passive: true});
+upButton.addEventListener('click', upAccordsList, {passive: true});
+downButton.addEventListener('click', downAccordsList, {passive: true});
 
 }, {once: true, passive: true});

@@ -86,7 +86,7 @@ const downAccordsList = () => {
 	});
 }
 
-upButton.addEventListener("click", upAccordsList);
-downButton.addEventListener("click", downAccordsList);
+upButton.addEventListener("click", upAccordsList, {passive: true});
+downButton.addEventListener("click", downAccordsList, {passive: true});
 
-});
+}, {once: true, passive: true});

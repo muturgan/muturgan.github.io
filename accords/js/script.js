@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-(() => {
+document.addEventListener('DOMContentLoaded', () => {
 
 const tone = {
     tonic:           ['до', 'до-диез', 'ре','ре-диез', 'ми', 'фа', 'фа-диез', 'соль', 'соль-диез', 'ля', 'ля-диез', 'си'],
@@ -89,4 +89,4 @@ const downAccordsList = () => {
 upButton.addEventListener("click", upAccordsList);
 downButton.addEventListener("click", downAccordsList);
 
-})();
+});

@@ -11,7 +11,7 @@ self.addEventListener("install", function (event) {
       return cache.add(offlineFallbackPage);
     })
   );
-});
+}, {once: true, passive: true});
 
 self.addEventListener("fetch", function (event) {
   if (!(event.request.url.indexOf('http') === 0)) {console.log(event)}
@@ -29,7 +29,7 @@ self.addEventListener("fetch", function (event) {
         return fromCache(event.request);
       })
   );
-});
+}, {passive: true});
 
 function fromCache(request) {
   return caches.open(CACHE_KEY).then(function (cache) {

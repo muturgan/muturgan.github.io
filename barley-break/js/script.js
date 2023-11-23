@@ -1,7 +1,7 @@
 ﻿"use strict";
 
-const tapSound = new Audio('Sound_22465.mp3');
-const resetSound = new Audio('Sound_22469.mp3');
+const tapSound = new Audio('audio/sound_22465.mp3');
+const resetSound = new Audio('audio/sound_22469.mp3');
 
 let gameField = document.getElementById("gameField");
 let emptyCell = document.getElementsByName("item0");

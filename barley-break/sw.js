@@ -24,7 +24,7 @@ self.addEventListener("fetch", function (event) {
         event.waitUntil(updateCache(event.request, response.clone()));
         return response;
       })
-      .catch(function (error) {        
+      .catch(function (error) {
         console.info("[PWA Builder] Network request Failed. Serving content from cache: " + error);
         return fromCache(event.request);
       })

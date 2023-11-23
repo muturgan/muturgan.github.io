@@ -88,19 +88,19 @@ function makeTurn(event) {
 
 function reset() {
   goHome();
-	
+
   let numPool = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,];
-  
-  let newPool = shuffle(numPool); 
-  
-   if (checkbox.checked) {
-	  while (!checkForConvergence(newPool)) {
-		  newPool = shuffle(numPool);
-	  }
+
+  let newPool = shuffle(numPool);
+
+  if (checkbox.checked) {
+    while (!checkForConvergence(newPool)) {
+      newPool = shuffle(numPool);
+    }
   }
-  
+
   for (let i = 0; i < 15; i++) {
-	  filledItems[i].innerHTML = newPool[i];
+    filledItems[i].innerHTML = newPool[i];
   }
 
   resetSound.play();
@@ -118,29 +118,29 @@ function shuffle(numPool) {
 
 function checkForConvergence(pool) {
 	let n = 0;
-	
+
 	for (let i = 0; i < pool.length; i++) {
 		for (let j = i + 1; j < pool.length; j++) {
 			if (pool[i] > pool[j]) n++;
 		}
 	}
-	
+
 	if (n % 2) {
 		return false;
 	} else {
-		return true;	
+		return true;
 	}
 }
 
 
 
 function goHome() {
-	
+
 	for (let i = 0; i < filledItems.length; i++) {
 		filledItems[i].style.top = "0px";
 		filledItems[i].style.left = "0px";
 	}
-	
+
 	emptyCell[0].style.top = "0px";
 	emptyCell[0].style.left = "0px";
 }

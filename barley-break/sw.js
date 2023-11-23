@@ -1,4 +1,4 @@
-var CACHE = "pwabuilder-offline";
+var CACHE_KEY = "barley-break-offline";
 
 var offlineFallbackPage = "index.html";
 
@@ -6,7 +6,7 @@ self.addEventListener("install", function (event) {
   console.info("[ PWA ] Install Event processing");
 
   event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
+    caches.open(CACHE_KEY).then(function (cache) {
       console.info("[ PWA ] Cached offline page during install");
       return cache.add(offlineFallbackPage);
     })
@@ -32,7 +32,7 @@ self.addEventListener("fetch", function (event) {
 });
 
 function fromCache(request) {
-  return caches.open(CACHE).then(function (cache) {
+  return caches.open(CACHE_KEY).then(function (cache) {
     return cache.match(request).then(function (matching) {
       if (!matching || matching.status === 404) {
         return Promise.reject("no-match");
@@ -44,7 +44,7 @@ function fromCache(request) {
 }
 
 function updateCache(request, response) {
-  return caches.open(CACHE).then(function (cache) {
+  return caches.open(CACHE_KEY).then(function (cache) {
     return cache.put(request, response);
   });
 }

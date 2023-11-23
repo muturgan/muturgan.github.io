@@ -3,11 +3,11 @@ var CACHE = "pwabuilder-offline";
 var offlineFallbackPage = "index.html";
 
 self.addEventListener("install", function (event) {
-  console.info("[PWA Builder] Install Event processing");
+  console.info("[ PWA ] Install Event processing");
 
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
-      console.info("[PWA Builder] Cached offline page during install");
+      console.info("[ PWA ] Cached offline page during install");
       return cache.add(offlineFallbackPage);
     })
   );
@@ -20,12 +20,12 @@ self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request)
       .then(function (response) {
-        console.info("[PWA Builder] add page to offline cache: " + response.url);
+        console.info("[ PWA ] add page to offline cache: " + response.url);
         event.waitUntil(updateCache(event.request, response.clone()));
         return response;
       })
       .catch(function (error) {
-        console.info("[PWA Builder] Network request Failed. Serving content from cache: " + error);
+        console.info("[ PWA ] Network request Failed. Serving content from cache: " + error);
         return fromCache(event.request);
       })
   );

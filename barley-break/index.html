@@ -19,6 +19,9 @@
           })
           .then(function (reg) {
             console.info("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+          })
+          .catch(function (err) {
+            console.info("[PWA Builder] Service worker registeration failed: " + err.message);
           });
       }
     }

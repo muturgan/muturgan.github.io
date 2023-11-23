@@ -14,8 +14,7 @@ self.addEventListener("install", function (event) {
 }, {once: true, passive: true});
 
 self.addEventListener("fetch", function (event) {
-  if (!(event.request.url.indexOf('http') === 0)) {console.log(event)}
-  if (event.request.method !== "GET" || !(event.request.url.indexOf('http') === 0)) return;
+  if (event.request.method !== "GET" || event.request.url.indexOf('http') !== 0) {return;}
 
   event.respondWith(
     fetch(event.request)
@@ -45,6 +44,14 @@ function fromCache(request) {
 
 function updateCache(request, response) {
   return caches.open(CACHE_KEY).then(function (cache) {
-    return cache.put(request, response);
+    return cache.put(request, response).catch((err) => {
+      console.log('\nrequest:');
+      console.log(request);
+      console.log('\nresponse:');
+      console.log(response);
+      console.log('\nerror:');
+      console.log(err);
+      console.log('==========================');
+    });
   });
 }

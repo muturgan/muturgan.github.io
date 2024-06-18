@@ -1,7 +1,7 @@
 ﻿"use strict";
 
-const tapSound = new Audio('audio/sound_22465.mp3');
-const resetSound = new Audio('audio/sound_22469.mp3');
+let tapSound = new Audio('audio/sound_22465.mp3');
+let resetSound = new Audio('audio/sound_22469.mp3');
 
 let gameField = document.getElementById("gameField");
 let emptyCell = document.getElementsByName("item0");
@@ -9,7 +9,7 @@ let filledItems = document.getElementsByClassName("filled");
 let resetButton = document.getElementById("reset");
 let checkbox = document.getElementById("valid");
 
-checkbox.addEventListener("change", () => tapSound.play())
+checkbox.addEventListener("change", () => tapSound.play());
 
 gameField.addEventListener("click", makeTurn);
 resetButton.addEventListener("click", reset);
@@ -20,7 +20,9 @@ resetButton.addEventListener("click", reset);
 
 function makeTurn(event) {
   let target = event.target;
-  if (target.getAttribute("name").substr(0, 4) != "item" && target.getAttribute("name") != "item0") return;
+  if (target.getAttribute("name").substr(0, 4) !== "item" && target.getAttribute("name") !== "item0") {
+    return;
+  }
 
   let targetCoords = target.getBoundingClientRect();
   let targetY = targetCoords.top;
@@ -125,11 +127,7 @@ function checkForConvergence(pool) {
 		}
 	}
 
-	if (n % 2) {
-		return false;
-	} else {
-		return true;
-	}
+  return n % 2 !== 0;
 }
 
 

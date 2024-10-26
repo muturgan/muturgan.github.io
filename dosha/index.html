@@ -17,8 +17,26 @@
 		}
 		td {
 			max-width: 33vw;
+			padding: 0;
+			text-align: center;
+		}
+		td:first-child, td:nth-child(2) {
+			padding: 1px 2px;
+		}
+		td:nth-child(2) {
+			text-align: left;
+		}
+		input {
+			margin: 5px;
+			width: 14px;
+			height: 14px;
+		}
+		label {
 			min-width: 24px;
 			min-height: 24px;
+			margin: 0;
+			padding: 0;
+			display: block;
 		}
 	</style>
 </head>
@@ -261,7 +279,7 @@
 				let tbody = document.createElement('tbody');
 				questions.forEach((question, j) => {
 					let tr = document.createElement('tr');
-					tr.innerHTML = `<td>${j + 1}.</td><td>${question}</td><td><input name="${i}_${j}" type="radio" value="0"></td><td><input name="${i}_${j}" type="radio" value="1"></td><td><input name="${i}_${j}" type="radio" value="2"></td><td><input name="${i}_${j}" type="radio" value="3"></td><td><input name="${i}_${j}" type="radio" value="4"></td>`;
+					tr.innerHTML = `<td>${j + 1}</td><td>${question}</td><td><label><input name="${i}_${j}" type="radio" value="0"></label></td><td><input name="${i}_${j}" type="radio" value="1"></td><td><input name="${i}_${j}" type="radio" value="2"></td><td><input name="${i}_${j}" type="radio" value="3"></td><td><input name="${i}_${j}" type="radio" value="4"></td>`;
 					tbody.append(tr);
 				});
 				table.append(tbody);

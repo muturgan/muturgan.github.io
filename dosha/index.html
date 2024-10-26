@@ -289,7 +289,7 @@
 				let tbody = document.createElement('tbody');
 				questions.forEach((question, j) => {
 					let tr = document.createElement('tr');
-					tr.innerHTML = `<td>${j + 1}</td><td>${question}</td><td><label><input name="${i}_${j}" type="radio" value="0"></label></td><td><label><input name="${i}_${j}" type="radio" value="1"></label></td><td><label><input name="${i}_${j}" type="radio" value="2"></label></td><td><label><input name="${i}_${j}" type="radio" value="3"></label></td><td><label><input name="${i}_${j}" type="radio" value="4"></label></td>`;
+					tr.innerHTML = `<td>${j + 1}</td><td>${question}</td><td><label for="${i}${j}0"><input id="${i}${j}0" name="${i}${j}" type="radio" value="0"></label></td><td><label for="${i}${j}1"><input id="${i}${j}1" name="${i}${j}" type="radio" value="1"></label></td><td><label for="${i}${j}2"><input id="${i}${j}2" name="${i}${j}" type="radio" value="2"></label></td><td><label for="${i}${j}3"><input id="${i}${j}3" name="${i}${j}" type="radio" value="3"></label></td><td><label for="${i}${j}4"><input id="${i}${j}4" name="${i}${j}" type="radio" value="4"></label></td>`;
 					tbody.append(tr);
 				});
 				table.append(tbody);

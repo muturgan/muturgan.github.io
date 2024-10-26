@@ -273,7 +273,7 @@
 
 				Array.from(form.elements).forEach((input) => {
 					if (input.checked) {
-						let ind = Number(input.name.split('_')[0]);
+						let ind = Number(input.name[0]);
 						score[ind] += Number(input.value);
 					}
 				});

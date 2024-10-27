@@ -70,6 +70,8 @@
 		<table>
 		</table>
 	</form>
+	<ul>
+	</ul>
 
 	<script>
 		let data = [
@@ -270,17 +272,16 @@
 			]]
 		];
 
-		let result = document.body.querySelector('ul');
-		if (!result) {
-			throw new Error();
-		}
+		let results = document.body.querySelectorAll('ul');
 		let table = document.body.querySelector('table');
 
 		document.addEventListener('DOMContentLoaded', () => {
 			data.forEach(([doshaName, questions], i) => {
-				let resultRow = document.createElement('li');
-				resultRow.innerHTML = `${doshaName}: <span>0</span>`;
-				result.append(resultRow);
+				results.forEach((result) => {
+					let resultRow = document.createElement('li');
+					resultRow.innerHTML = `${doshaName}: <span>0</span>`;
+					result.append(resultRow);
+				});
 
 				let thead = document.createElement('thead');
 				thead.innerHTML = `<tr><td></td><td>${doshaName}-доша</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>`;
@@ -306,8 +307,10 @@
 					}
 				});
 
-				Array.from(result.children).forEach((resultRow, d) => {
-					resultRow.children[0].textContent = score[d];
+				results.forEach((result) => {
+					Array.from(result.children).forEach((resultRow, d) => {
+						resultRow.children[0].textContent = score[d];
+					});
 				});
 			});
 		}, {once: true});

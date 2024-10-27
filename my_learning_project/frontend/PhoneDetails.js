@@ -3,16 +3,16 @@ import Component from "./Component.js";
 export default class PhoneDetails extends Component {
    constructor({ container, }) {
 		super(container);
-		
+
 		this._container = container;
 		this._selectedPhoneData = {};
       this._filteredData = {};
-		
+
 		this._component = document.createElement(`div`);
       this._component.classList.add(`js-hidden`);
 	}
-   
-   
+
+
    setSelectedPhone(selectedPhonedata) {
       this._selectedPhoneData = selectedPhonedata;
       for (const key in this._selectedPhoneData) {
@@ -22,28 +22,28 @@ export default class PhoneDetails extends Component {
       }
 
       this._render();
-      
+
       this._component.querySelector(`[data-action="add-to-chart"]`).addEventListener(`click`, (event) => {
          const customEvent = new CustomEvent(`goodAdded`, {
             detail: this._selectedPhoneData.name,
          });
-         
-         this._component.dispatchEvent( customEvent );			
+
+         this._component.dispatchEvent( customEvent );
 		});
-      
+
       this._component.querySelector(`[data-action="back-to-list"]`).addEventListener(`click`, (event) => {
          const customEvent = new CustomEvent(`detaisPageClosed`);
-         
-         this._component.dispatchEvent( customEvent );			
+
+         this._component.dispatchEvent( customEvent );
 		});
-      
+
       this._imagesList.addEventListener(`click`, (event) => {
          if (event.target.closest(`img`)) {
             this._mainImage.src = event.target.src;
-         }		
+         }
 		});
    };
-   
+
    _render() {
 		this._component.innerHTML = `
          <img
@@ -51,14 +51,14 @@ export default class PhoneDetails extends Component {
             data-indicator="main-image"
             src="${ this._selectedPhoneData.images[0] }"
          >
-         
+
          <button
             data-action="add-to-chart"
             class="nav-button"
             >
                Add to chart
          </button>
-         
+
          <button
             data-action="back-to-list"
             class="nav-button"
@@ -71,19 +71,19 @@ export default class PhoneDetails extends Component {
                      Back to list
                </a>
          </button>
-         
+
          <h1>${ this._selectedPhoneData.name }</h1>
-         
+
          <p>${ this._selectedPhoneData.description }</p>
          <ul class="phone-thumbs"></ul>
          <ul class="specs"></ul>
       `;
-      
+
       this._mainImage = this._component.querySelector(`[data-indicator="main-image"]`);
-      
+
       this._imagesList = this._component.querySelector(`.phone-thumbs`);
       const specsList = this._component.querySelector(`.specs`);
-      
+
       for (const image of this._selectedPhoneData.images) {
          this._imagesList.insertAdjacentHTML(`beforeEnd`, `
             <li>
@@ -94,10 +94,10 @@ export default class PhoneDetails extends Component {
             </li>
          `);
       }
-      
+
       let assistiveString = ``;
-      
-      
+
+
       //render Hardware
       assistiveString = `
          <li>
@@ -122,10 +122,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Battery
       assistiveString = `
          <li>
@@ -140,10 +140,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Storage and Memory
       assistiveString = `
          <li>
@@ -156,10 +156,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Connectivity
       assistiveString = `
          <li>
@@ -184,10 +184,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Android
       assistiveString = `
          <li>
@@ -200,10 +200,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Size and Weight
       assistiveString = `
          <li>
@@ -218,10 +218,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
       //render Display
       assistiveString = `
          <li>
@@ -239,10 +239,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
+
+
 
       //render Camera
       assistiveString = `
@@ -256,31 +256,31 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-      
-      
+
+
+
       //render Availability
       assistiveString = `
          <li>
             <span>Availability</span>
             <dl>
       `;
-      
+
       for (const availabilityFeature of this._selectedPhoneData.availability) {
          assistiveString += `<dd> ${ availabilityFeature || '-' } </dd>`;
       }
-      
+
       assistiveString += `
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-  
-      
+
+
+
       //render Additional Features
       assistiveString = `
          <li>
@@ -290,10 +290,10 @@ export default class PhoneDetails extends Component {
             </dl>
          </li>
       `;
-      
+
       specsList.insertAdjacentHTML(`beforeEnd`, assistiveString);
-      
-		
+
+
 		this._container.append(this._component);
 	};
 }

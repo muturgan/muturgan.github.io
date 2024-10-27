@@ -28,5 +28,5 @@ socket.on('connect', function(){
 
 	window.onunload = function() {
 		socket.disconnect();
-	  };
+	};
 });

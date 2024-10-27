@@ -83,7 +83,7 @@ e-mail: caxap_8787@mail.ru
    --coef: 4;
 	--sheet-width: calc( var(--coef) * 210px );
    --sheet-height: calc( 1.414 * var(--sheet-width) );
-   
+
    padding: calc(0.08 * var(--sheet-width));
 	margin: calc(0.08 * var(--sheet-width));
 	text-align:center;

@@ -4,23 +4,23 @@ import PhonesListItem from './PhonesListItem.js';
 export default class PhonesList extends Component {
 	constructor({ container, }) {
 		super(container);
-		
+
 		this._container = container;
 		this._phones = null;
 		this._items = [];
-		
+
 		this._component = document.createElement(`ul`);
 		this._component.className = `phones`;
-      
-      this._component.addEventListener(`goodSelected`, (event) => {
+
+		this._component.addEventListener(`goodSelected`, (event) => {
 			event.stopPropagation();
 		});
-      
-      this._component.addEventListener(`goodAdded`, (event) => {
+
+		this._component.addEventListener(`goodAdded`, (event) => {
 			event.stopPropagation();
 		});
 	}
-	
+
 	_render() {
 		for (const phoneFeatures of this._phones) {
 			this._items.push (new PhonesListItem({
@@ -28,15 +28,15 @@ export default class PhonesList extends Component {
 				features: phoneFeatures,
 			}));
 		}
-		
+
 		this._container.append(this._component);
 	};
-   
-   setPhones(phones) {
-      this._phones = phones;
-      this._render();
-   };
-	
+
+	setPhones(phones) {
+		this._phones = phones;
+		this._render();
+	};
+
 	sort(feature) {
 		this._items.sort((a, b) => {
 			if (a._features[`${feature}`] > b._features[`${feature}`]) {
@@ -45,12 +45,12 @@ export default class PhonesList extends Component {
 				return 1;
 			}
 		});
-		
+
 		for (const item of this._items) {
 			this._component.prepend(item._component);
 		}
 	};
-	
+
 	filter(str) {
 		str = str.toLowerCase();
 

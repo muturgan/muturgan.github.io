@@ -3,15 +3,15 @@ import Component from "./Component.js";
 export default class AddedGoodsItem extends Component {
 	constructor({ container, good, }) {
 		super(container);
-		
+
 		this._container = container;
 		this._good = good;
-		
+
 		this._component = document.createElement(`li`);
-		
+
 		this._render();
 	}
-	
+
 	addGood({ goodsList, good, }) {
 		for (const existentGood of goodsList.querySelectorAll(`li`)) {
 			if (existentGood.firstElementChild.textContent === good) {
@@ -21,10 +21,10 @@ export default class AddedGoodsItem extends Component {
 				return;
 			}
 		}
-		
+
 		goodsList.lastElementChild.append(this._component);
 	};
-	
+
 	removeGood({ goodsList, good, }) {
 		if (+good.querySelector(`.goods-amount`).textContent.substring(1) > 1) {
 			good.querySelector(`.goods-amount`).textContent = (
@@ -34,15 +34,15 @@ export default class AddedGoodsItem extends Component {
 			goodsList.removeChild(good);
 		}
 	};
-	
+
 	_render() {
 		this._component.innerHTML = `
 			<span>${ this._good }</span>
-         <br>
+			<br>
 			<span class="goods-amount">x1</span>
 			<button class="remove-good">x</button>
 			`;
-		
+
 		this.addGood({
 				goodsList: this._container,
 				good: this._good,

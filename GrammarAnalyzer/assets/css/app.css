@@ -1,12 +1,12 @@
-body { 
-    padding-top: 65px; 
+body {
+	padding-top: 65px;
 }
 
-textarea { 
-  	width: 100%; 
-    height: 200px;
+textarea {
+	width: 100%;
+	height: 200px;
 }
 
 .js-hidden {
-    visibility: hidden;
+	visibility: hidden;
 }

@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		let tbody = document.createElement('tbody');
 		questions.forEach((question, j) => {
 			let tr = document.createElement('tr');
-			let questionNumber = Number((j / 5).toFixed(0));
+			let questionNumber = j + i * 63;
 			let questionValue = Number(storedMarks[questionNumber]);
 			tr.innerHTML = `<td>${j + 1}</td><td>${question}</td><td><label for="${i}${j}0"><input${questionValue === 0 ? ' checked' : ''} id="${i}${j}0" name="${i}${j}" type="radio" value="0"></label></td><td><label for="${i}${j}1"><input${questionValue === 1 ? ' checked' : ''} id="${i}${j}1" name="${i}${j}" type="radio" value="1"></label></td><td><label for="${i}${j}2"><input${questionValue === 2 ? ' checked' : ''} id="${i}${j}2" name="${i}${j}" type="radio" value="2"></label></td><td><label for="${i}${j}3"><input${questionValue === 3 ? ' checked' : ''} id="${i}${j}3" name="${i}${j}" type="radio" value="3"></label></td><td><label for="${i}${j}4"><input${questionValue === 4 ? ' checked' : ''} id="${i}${j}4" name="${i}${j}" type="radio" value="4"></label></td>`;
 			tbody.append(tr);
@@ -339,6 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				resultRow.children[0].textContent = '0';
 			});
 		});
+
+		localStorage.clear();
 	});
 
 	window.addEventListener('unload', () => {
@@ -367,8 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let scoreToStore = Array.from(results[0].children).map((resultRow) => resultRow.children[0].textContent).join('');
 			localStorage.setItem(MY_DOSHA_SCORE, scoreToStore);
 		} else {
-			localStorage.removeItem(MY_DOSHA_MARKS);
-			localStorage.removeItem(MY_DOSHA_SCORE);
+			localStorage.clear();
 		}
 	});
 }, {once: true});

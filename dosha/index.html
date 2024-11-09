@@ -75,9 +75,10 @@
 
 	<script>
 (()=>{
-		let tt = localStorage.getItem('beforeunload');
-		let pp = localStorage.getItem('unload');
-		console.log({tt, pp});
+		let MY_DOSHA_KEY = 'MY_DOSHA_KEY';
+		let dosha = localStorage.getItem(MY_DOSHA_KEY);
+		console.log({dosha});
+
 		let data = [
 			['Вата', [
 				'Я довольно высок ростом (или очень низкого роста)',
@@ -319,12 +320,12 @@
 			});
 		}, {once: true});
 
-		window.addEventListener('beforeunload', () => {
-			localStorage.setItem('beforeunload', 3);
-		});
-
 		window.addEventListener('unload', () => {
-			localStorage.setItem('unload', 2);
+			let data = [];
+			Array.from(results[0].children).forEach((resultRow) => {
+				data.push(Number(resultRow.children[0].textContent));
+			});
+			localStorage.setItem(MY_DOSHA_KEY, JSON.stringify(data));
 		});
 })();
 	</script>

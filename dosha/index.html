@@ -75,8 +75,9 @@
 
 	<script>
 (()=>{
-		let tt = localStorage.setItem('test', 2);
-		console.log({tt});
+		let tt = localStorage.getItem('beforeunload');
+		let pp = localStorage.getItem('unload');
+		console.log({tt, pp});
 		let data = [
 			['Вата', [
 				'Я довольно высок ростом (или очень низкого роста)',
@@ -318,8 +319,12 @@
 			});
 		}, {once: true});
 
+		window.addEventListener('beforeunload', () => {
+			localStorage.setItem('beforeunload', 3);
+		});
+
 		window.addEventListener('unload', () => {
-			localStorage.setItem('test', 2);
+			localStorage.setItem('unload', 2);
 		});
 })();
 	</script>

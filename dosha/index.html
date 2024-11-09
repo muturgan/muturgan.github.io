@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		localStorage.clear();
 	});
 
-	window.addEventListener('unload', () => {
+	window.addEventListener('beforeunload', () => {
 		let questionChecked = false;
 		let wasChecked = false;
 

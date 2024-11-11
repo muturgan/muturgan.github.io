@@ -1,0 +1,25 @@
+{
+	"name": "Моя Доша",
+	"description": "Сервис для определения доши - конституции человека согдласно учения аюрведы",
+	"icons": [
+		{
+			"src": "om.svg",
+			"type": "image/svg+xml",
+			"sizes": "any"
+		},
+		{
+			"src": "om192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "om512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}

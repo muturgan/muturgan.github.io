@@ -312,34 +312,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		table.append(tbody);
 	});
 
-	let inputs = Array.from(form.elements);
-
-	form.addEventListener('change', () => {
+	form.addEventListener('change', (ev) => {
 		let score = [0,0,0];
 
-		inputs.forEach((input) => {
+		for (let input of form.elements) {
 			if (input.checked) {
 				let ind = Number(input.name[0]);
 				score[ind] += Number(input.value);
 			}
-		});
+		}
 
 		results.forEach((result) => {
-			Array.from(result.children).forEach((resultRow, d) => {
-				resultRow.children[0].textContent = score[d];
-			});
+			let d = 0;
+			for (let resultRow of result.children) {
+				resultRow.children[0].textContent = score[d++];
+			}
 		});
 	});
 
 	document.body.querySelector('button').addEventListener('click', () => {
-		inputs.forEach((input) => {
-			input.checked = false;
-		});
+		form.reset();
 
 		results.forEach((result) => {
-			Array.from(result.children).forEach((resultRow, d) => {
+			for (let resultRow of result.children) {
 				resultRow.children[0].textContent = '0';
-			});
+			}
 		});
 
 		localStorage.clear();
@@ -349,26 +346,29 @@ document.addEventListener('DOMContentLoaded', () => {
 		let questionChecked = false;
 		let wasChecked = false;
 
-		let marks = inputs.reduce((arr, input, i) => {
+		let marks = '';
+		for (let i = 0; i < form.elements.length; i++) {
 			let markValue = i % 5;
 
-			if (input.checked) {
+			if (form.elements[i].checked) {
 				questionChecked = true;
 				wasChecked = true;
-				arr.push(String(markValue));
+				marks += String(markValue);
 			}
 			if (markValue === 4) {
 				if (!questionChecked) {
-					arr.push('_');
+					marks += '_';
 				}
 				questionChecked = false;
 			}
-			return arr;
-		}, []).join('');
+		}
 
 		if (wasChecked) {
 			localStorage.setItem(MY_DOSHA_MARKS, marks);
-			let scoreToStore = Array.from(results[0].children).map((resultRow) => resultRow.children[0].textContent).join('');
+			let scoreToStore = '';
+			for (let resultRow of results[0].children) {
+				scoreToStore += resultRow.children[0].textContent;
+			}
 			localStorage.setItem(MY_DOSHA_SCORE, scoreToStore);
 		} else {
 			localStorage.clear();

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Брос кубов</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        :root {
+            --accent: #4a90e2;
+            --accent-dark: #3a7bd6;
+            --accent-darker: #2c6bb8;
+            --border: #999;
+            --gap: 0.5rem;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            min-height: 100svh;
+            padding: 2.5rem 1.25rem;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 { margin: 0 0 1.5rem; font-size: 1.5rem; }
+        .characteristics,
+        .status-tables { margin-bottom: 2rem; }
+
+        .equipment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--gap);
+            margin-top: 0.75rem;
+        }
+        .equipment-label {
+            font-size: 1rem;
+        }
+        .equipment-select {
+            padding: 0.25rem 0.5rem;
+            font: inherit;
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.1875rem;
+            background: #fff;
+            cursor: pointer;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .pool-label {
+            font-size: 1rem;
+        }
+        .pool-value {
+            min-width: 2rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        button {
+            padding: 0.5rem 1.25rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--gap);
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover:not(:disabled) { background: var(--accent-dark); }
+        button:active:not(:disabled) { background: var(--accent-darker); }
+        button:disabled {
+            background: #b0b8c4;
+            color: #eef1f5;
+            cursor: not-allowed;
+        }
+
+        #dice {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.875rem;
+        }
+        .die {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4.375rem;
+            height: 4.375rem;
+            background: #fff;
+            border: 0.1875rem solid #888;
+            border-radius: 0.875rem;
+            box-shadow: 0 0.375rem 0 #666, 0 0.5rem 0.75rem rgba(0, 0, 0, 0.15);
+            font-size: 2rem;
+            font-weight: 800;
+            color: #222;
+            user-select: none;
+        }
+        .die.yellow {
+            background: #ffeb3b;
+            border-color: #e6c200;
+            box-shadow: 0 0.375rem 0 #b58a00, 0 0.5rem 0.75rem rgba(0, 0, 0, 0.15);
+            color: #5d4037;
+        }
+        .die.rolling { animation: rollShake 0.15s infinite; }
+
+        @keyframes rollShake {
+            0%,
+            100% { transform: translate(0, 0) rotate(0deg); }
+            25%  { transform: translate(0.125rem, -0.125rem) rotate(-1deg); }
+            50%  { transform: translate(-0.125rem, 0.125rem) rotate(1deg); }
+            75%  { transform: translate(0.125rem, 0.125rem) rotate(-1deg); }
+        }
+
+        .stats-table {
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .stats-table th,
+        .stats-table td {
+            padding: 0.25rem 0.5rem;
+            border: 0.0625rem solid var(--border);
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        .stats-table th { background: #e0e0e0; }
+
+        .status-tables {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        .status-table th,
+        .status-table td { text-align: center; }
+
+        .stats-cell,
+        .status-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+        }
+        .stats-cell { justify-content: space-between; }
+        .status-cell {
+            justify-content: center;
+            gap: 0.375rem;
+        }
+
+        .status-icon {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .stats-radio {
+            flex: 0 0 auto;
+            width: 0.875rem;
+            height: 0.875rem;
+            margin: 0 0 0 auto;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+        .stats-input {
+            flex: 0 0 auto;
+            width: 1.75rem;
+            min-width: 0;
+            height: 1.25rem;
+            padding: 0;
+            margin: 0;
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.1875rem;
+            font: inherit;
+            line-height: 1;
+            text-align: center;
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+        .stats-input::-webkit-inner-spin-button,
+        .stats-input::-webkit-outer-spin-button {
+            margin: 0;
+            appearance: none;
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .computer-notice {
+            margin-top: 0.75rem;
+            color: #c62828;
+        }
+    
+</style>
+</head>
+<body>
+    <main>
+        <section class="status-tables">
+            <table class="stats-table status-table">
+                <thead>
+                    <tr>
+                        <th colspan="5">раны</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="status-cell"><span class="stats-label">fine</span><input type="radio" name="wounds" value="0" class="stats-radio" checked></div></td>
+                        <td><div class="status-cell"><span class="stats-label">hurt</span><input type="radio" name="wounds" value="1" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="stats-label">injured</span><input type="radio" name="wounds" value="2" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="stats-label">maimed</span><input type="radio" name="wounds" value="3" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="stats-label">dead</span><input type="radio" name="wounds" value="4" class="stats-radio"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="stats-table status-table">
+                <thead>
+                    <tr>
+                        <th colspan="5">розыск</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="status-cell"><span class="status-icon">👍</span><input type="radio" name="wanted" value="0" class="stats-radio" checked></div></td>
+                        <td><div class="status-cell"><span class="status-icon">⭐</span><input type="radio" name="wanted" value="1" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="status-icon">⭐</span><input type="radio" name="wanted" value="2" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="status-icon">⭐</span><input type="radio" name="wanted" value="3" class="stats-radio"></div></td>
+                        <td><div class="status-cell"><span class="status-icon">⭐</span><input type="radio" name="wanted" value="4" class="stats-radio"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="characteristics">
+            <h1>Характеристики персонажа</h1>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th><div class="stats-cell"><span class="stats-label">мозги</span><input type="radio" name="stat-header" value="0" class="stats-radio"><input type="number" min="0" max="5" step="1" value="0" class="stats-input"></div></th>
+                        <th><div class="stats-cell"><span class="stats-label">наглость</span><input type="radio" name="stat-header" value="1" class="stats-radio"><input type="number" min="0" max="5" step="1" value="0" class="stats-input"></div></th>
+                        <th><div class="stats-cell"><span class="stats-label">механика</span><input type="radio" name="stat-header" value="2" class="stats-radio"><input type="number" min="0" max="5" step="1" value="0" class="stats-input"></div></th>
+                        <th><div class="stats-cell"><span class="stats-label">насилие</span><input type="radio" name="stat-header" value="3" class="stats-radio"><input type="number" min="0" max="5" step="1" value="0" class="stats-input"></div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="stats-cell"><span class="stats-label">альфа-комплекс</span><input type="radio" name="stat-body" value="0" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">блеф</span><input type="radio" name="stat-body" value="1" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">взрывчатка</span><input type="radio" name="stat-body" value="2" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">атлетика</span><input type="radio" name="stat-body" value="3" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="stats-cell"><span class="stats-label">бюрократия</span><input type="radio" name="stat-body" value="4" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">очарование</span><input type="radio" name="stat-body" value="5" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">инженерия</span><input type="radio" name="stat-body" value="6" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">пушки</span><input type="radio" name="stat-body" value="7" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="stats-cell"><span class="stats-label">психология</span><input type="radio" name="stat-body" value="8" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">запугивание</span><input type="radio" name="stat-body" value="9" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">управление/вождение</span><input type="radio" name="stat-body" value="10" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">драка</span><input type="radio" name="stat-body" value="11" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="stats-cell"><span class="stats-label">наука</span><input type="radio" name="stat-body" value="12" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">скрытность</span><input type="radio" name="stat-body" value="13" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">компьютеры/хакинг</span><input type="radio" name="stat-body" value="14" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                        <td><div class="stats-cell"><span class="stats-label">метание</span><input type="radio" name="stat-body" value="15" class="stats-radio"><input type="number" min="-5" max="5" step="1" value="0" class="stats-input"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="equipment">
+                <label class="equipment-label" for="equipment-modifier">модификатор снаряжения</label>
+                <select id="equipment-modifier" class="equipment-select">
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+        </section>
+        <h1>Брос кубов</h1>
+        <div class="controls">
+            <span class="pool-label">кубов в броске</span>
+            <span class="pool-value" id="pool-value">1</span>
+            <button id="roll" disabled>бросок</button>
+        </div>
+        <div id="dice"></div>
+        <div id="result"></div>
+    </main>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var DIE_FACES = 6;
+            var MIN_SUCCESS = 5;
+            var BASE_ATTENTION_THRESHOLD = 6;
+            var MIN_ATTENTION_THRESHOLD = 2;
+            var NO_SELECTION = -1;
+            var DEAD_INDEX = 4;
+            var ANIMATION_FRAMES = 10;
+            var ANIMATION_STEP_MS = 60;
+            var YELLOW_CLASS = 'yellow';
+            var ROLLING_CLASS = 'rolling';
+
+            var GROUP_EQUIPMENT = 'equipment-modifier';
+            var GROUP_HEADER = 'stat-header';
+            var GROUP_BODY = 'stat-body';
+            var GROUP_WOUNDS = 'wounds';
+            var GROUP_WANTED = 'wanted';
+
+            var NOTICE_TEXT = 'Друг-компьютер обратил внимание на вашу ситуацию';
+
+            var poolValueEl = document.getElementById('pool-value');
+            var rollBtn = document.getElementById('roll');
+            var diceContainer = document.getElementById('dice');
+            var resultEl = document.getElementById('result');
+            var equipmentSelect = document.getElementById(GROUP_EQUIPMENT);
+
+            function checkedRadio(group) {
+                return document.querySelector('.stats-radio[name="' + group + '"]:checked');
+            }
+
+            function checkedValueOf(group) {
+                var radio = checkedRadio(group);
+                if (!radio) return NO_SELECTION;
+                var value = parseInt(radio.value, 10);
+                return isNaN(value) ? NO_SELECTION : value;
+            }
+
+            function numberInputNextTo(radio) {
+                if (!radio) return null;
+                var cell = radio.closest('.stats-cell');
+                return cell ? cell.querySelector('.stats-input') : null;
+            }
+
+            function skillValueOf(radio) {
+                var input = numberInputNextTo(radio);
+                if (!input) return 0;
+                return clampToInput(input, parseInt(input.value, 10));
+            }
+
+            function clampToInput(input, value) {
+                var min = parseInt(input.getAttribute('min'), 10);
+                var max = parseInt(input.getAttribute('max'), 10);
+                if (isNaN(min)) min = -DIE_FACES;
+                if (isNaN(max)) max = DIE_FACES;
+                if (isNaN(value)) return min > 0 ? min : 0;
+                return Math.min(max, Math.max(min, value));
+            }
+
+            function equipmentModifier() {
+                if (!equipmentSelect) return 0;
+                var value = parseInt(equipmentSelect.value, 10);
+                return isNaN(value) || value < 0 ? 0 : value;
+            }
+
+            function readState() {
+                var headRadio = checkedRadio(GROUP_HEADER);
+                var bodyRadio = checkedRadio(GROUP_BODY);
+                var woundSeverity = checkedValueOf(GROUP_WOUNDS);
+                var wantedLevel = checkedValueOf(GROUP_WANTED);
+
+                var headValue = skillValueOf(headRadio);
+                var bodyValue = skillValueOf(bodyRadio);
+                var woundPenalty = woundSeverity > 0 ? -woundSeverity : 0;
+                var stars = wantedLevel > 0 ? wantedLevel : 0;
+                var skillTotal = headValue + bodyValue + woundPenalty + equipmentModifier();
+                var isPenaltyRoll = skillTotal < 0;
+
+                return {
+                    hasBothSkills: !!headRadio && !!bodyRadio,
+                    isDead: woundSeverity === DEAD_INDEX,
+                    isPenaltyRoll: isPenaltyRoll,
+                    diceCount: Math.max(1, (isPenaltyRoll ? headValue : skillTotal) + 1),
+                    attentionThreshold: Math.max(
+                        MIN_ATTENTION_THRESHOLD,
+                        BASE_ATTENTION_THRESHOLD - stars
+                    )
+                };
+            }
+
+            function isRollAllowed(state) {
+                return state.hasBothSkills && !state.isDead;
+            }
+
+            var cryptoObj = (typeof window !== 'undefined' && window.crypto) || null;
+            var hasCryptoRandom =
+                !!cryptoObj &&
+                typeof cryptoObj.getRandomValues === 'function' &&
+                typeof window.Uint32Array === 'function';
+
+            var randomBuffer = hasCryptoRandom ? new window.Uint32Array(1) : null;
+            var UINT32_RANGE = 4294967296;
+
+            function randomUnit() {
+                if (hasCryptoRandom) {
+                    cryptoObj.getRandomValues(randomBuffer);
+                    return randomBuffer[0] / UINT32_RANGE;
+                }
+                return Math.random();
+            }
+
+            function rollValue() {
+                return Math.floor(randomUnit() * DIE_FACES) + 1;
+            }
+
+            function createDie(value, isYellow, isRolling) {
+                var die = document.createElement('div');
+                var classes = ['die'];
+                if (isRolling) classes.push(ROLLING_CLASS);
+                if (isYellow) classes.push(YELLOW_CLASS);
+                die.className = classes.join(' ');
+                die.textContent = value;
+                return die;
+            }
+
+            function renderDice(values, isRolling) {
+                var last = values.length - 1;
+                var fragment = document.createDocumentFragment();
+                for (var i = 0; i < values.length; i++) {
+                    fragment.appendChild(createDie(values[i], i === last, isRolling));
+                }
+                diceContainer.innerHTML = '';
+                diceContainer.appendChild(fragment);
+            }
+
+            function countSuccesses(values, subtractFailures) {
+                var successes = 0;
+                var failures = 0;
+                for (var i = 0; i < values.length; i++) {
+                    if (values[i] >= MIN_SUCCESS) successes++;
+                    else failures++;
+                }
+                return subtractFailures ? successes - failures : successes;
+            }
+
+            function renderResult(values, state) {
+                var successes = countSuccesses(values, state.isPenaltyRoll);
+                resultEl.textContent = 'Количество успехов: ' + successes;
+
+                var yellowDieValue = values[values.length - 1];
+                if (yellowDieValue >= state.attentionThreshold) {
+                    var notice = document.createElement('div');
+                    notice.className = 'computer-notice';
+                    notice.textContent = NOTICE_TEXT;
+                    resultEl.appendChild(notice);
+                }
+            }
+
+            function updatePool() {
+                var state = readState();
+                poolValueEl.textContent = state.diceCount;
+                rollBtn.disabled = !isRollAllowed(state);
+                return state;
+            }
+
+            function generateValues(count) {
+                var values = new Array(count);
+                for (var i = 0; i < count; i++) {
+                    values[i] = rollValue();
+                }
+                return values;
+            }
+
+            function animateShaking(diceCount, onFinished) {
+                var elapsedFrames = 0;
+                var timer = setInterval(function () {
+                    elapsedFrames++;
+                    if (elapsedFrames >= ANIMATION_FRAMES) {
+                        clearInterval(timer);
+                        onFinished();
+                        return;
+                    }
+                    renderDice(generateValues(diceCount), true);
+                }, ANIMATION_STEP_MS);
+            }
+
+            function rollDice() {
+                var state = updatePool();
+                if (!isRollAllowed(state)) return;
+
+                diceContainer.innerHTML = '';
+                resultEl.textContent = '';
+
+                var values = generateValues(state.diceCount);
+
+                animateShaking(state.diceCount, function () {
+                    renderDice(values, false);
+                    renderResult(values, state);
+                });
+            }
+
+            function updatePoolAfterBrowserSettlesRadios() {
+                setTimeout(updatePool, 0);
+            }
+
+            document.querySelectorAll('.stats-radio').forEach(function (radio) {
+                if (radio.name === GROUP_WANTED) return;
+                radio.addEventListener('change', updatePoolAfterBrowserSettlesRadios);
+            });
+
+            document.querySelectorAll('.stats-input').forEach(function (input) {
+                function normalizeAndUpdatePool() {
+                    var normalized = clampToInput(input, parseInt(input.value, 10));
+                    if (String(normalized) !== input.value) {
+                        input.value = normalized;
+                    }
+                    updatePool();
+                }
+                input.addEventListener('input', normalizeAndUpdatePool);
+                input.addEventListener('change', normalizeAndUpdatePool);
+            });
+
+            if (equipmentSelect) {
+                equipmentSelect.addEventListener('change', updatePool);
+            }
+
+            rollBtn.addEventListener('click', rollDice);
+
+            updatePool();
+        })();
+    
+    </script>
+</body>
+</html>
